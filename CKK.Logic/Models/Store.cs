@@ -108,7 +108,7 @@ namespace CKK.Logic.Models
         
         }
 
-        public Product FindStoreById(int id)
+        public Product FindStoreItemById(int id)
         {
             if (_product1 != null && _product1.GetId() == id)
             {
