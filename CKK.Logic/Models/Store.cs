@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Models
 {
-    internal class Store
+     public class Store
     {
         private int _id;
         private string _name;
@@ -34,30 +34,27 @@ namespace CKK.Logic.Models
            _name = name;
         }
 
-        public string AddStoreItem(Product prod)
+        public void AddStoreItem(Product prod)
         {
             if (_product1 == null)
             {
                 _product1 = prod;
-                return $" Added {_product1} to product 1";
+               
             }
 
             else if (_product2 == null)
             {
                 _product2 = prod;
-                return $" Added {_product2} to product 2";
+               
             }
 
             else if (_product3== null)
             {
                 _product3 = prod;
-                return $" Added {_product3} to product 3";
+             
             }
 
-            else
-            {
-                return $" No available product slots";
-            }
+           
         }
 
         public void RemoveStoreItem(int productNumber)
