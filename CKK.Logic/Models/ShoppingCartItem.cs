@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +42,9 @@ namespace CKK.Logic.Models
         public decimal GetTotal(decimal price)
         {
             _price = price;   
-            GetQuantity(); * price;
+            decimal total = _quantity * price;
+            return total;
+            
         }
 
 
