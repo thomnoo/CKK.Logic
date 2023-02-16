@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CKK.Logic", "CKK.Logic\CKK.Logic.csproj", "{5758D833-8493-43E4-B495-EFD2EBE066B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK.Logic", "CKK.Logic\CKK.Logic.csproj", "{5758D833-8493-43E4-B495-EFD2EBE066B7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK", "..\..\..\Desktop\CKK\CKK.csproj", "{B3DB83A4-E376-4E7B-A0D9-FF206AF6AB67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{5758D833-8493-43E4-B495-EFD2EBE066B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5758D833-8493-43E4-B495-EFD2EBE066B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5758D833-8493-43E4-B495-EFD2EBE066B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3DB83A4-E376-4E7B-A0D9-FF206AF6AB67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3DB83A4-E376-4E7B-A0D9-FF206AF6AB67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3DB83A4-E376-4E7B-A0D9-FF206AF6AB67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3DB83A4-E376-4E7B-A0D9-FF206AF6AB67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
