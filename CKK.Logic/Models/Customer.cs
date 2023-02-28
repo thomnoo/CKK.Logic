@@ -1,6 +1,6 @@
 ﻿
 
-namespace CKK.Logic
+namespace CKK.Logic.Models
 {
     public class Customer
     {
