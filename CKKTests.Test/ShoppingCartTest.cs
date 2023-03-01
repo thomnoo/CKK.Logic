@@ -1,9 +1,10 @@
 using CKK.Logic.Models;
 
-namespace CKK.SoppingCartTest.tests
+namespace CKKTests.Test
 {
-    public class UnitTest1
+    public class ShoppingCartTest
     {
+
         [Fact]
         public void ShoppingCart_GetTotal_Success()
         {
@@ -24,7 +25,7 @@ namespace CKK.SoppingCartTest.tests
 
             }
 
-            catch(Exception e) 
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -41,7 +42,7 @@ namespace CKK.SoppingCartTest.tests
                 ShoppingCartItem item = new ShoppingCartItem(expected, 1);
 
                 //act
-                Product actual = cart.AddProduct(expected).GetProduct();   
+                Product actual = cart.AddProduct(expected).GetProduct();
 
                 //assert
                 Assert.Equal(expected, actual);
@@ -61,9 +62,9 @@ namespace CKK.SoppingCartTest.tests
                 int expected = 1;
 
                 //Act
-                cart.AddProduct(product , 3);
+                cart.AddProduct(product, 3);
                 int actual = cart.RemoveProduct(product, 2).GetQuantity();
-                
+
                 //Assert
                 Assert.Equal(expected, actual);
 
@@ -94,4 +95,7 @@ namespace CKK.SoppingCartTest.tests
         }
 
     }
+
 }
+
+
