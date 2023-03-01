@@ -100,14 +100,16 @@ namespace CKK.Logic.Models
 
             if (item != null)
             {
-                int newQuantity = item.GetQuantity() - quantity;
-
-                if(newQuantity < 0)
+                if (item.GetQuantity() - quantity < 0)
                 {
-                    return null;
+                    quantity = item.GetQuantity();
                 }
 
-                else if (newQuantity == 0)
+                int newQuantity = item.GetQuantity() - quantity;
+
+              
+
+                if (newQuantity == 0)
                 {
                     return null;
                 }
