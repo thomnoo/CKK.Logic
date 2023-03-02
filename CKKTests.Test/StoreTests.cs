@@ -44,6 +44,24 @@ namespace CKKTests.Test
             catch (Exception e) { throw new Exception(e.Message); }
          }
 
+        [Fact]
+        public void Store_GetName_Success()
+        {
+            try
+            {
+                //Assemble
+                Store store = new Store();
+                store.SetName("Apple");
+                string expected = "Apple";
+                //Act
+                string actual = store.GetName();
+                //Assert
+                Assert.Equal(expected, actual);
+
+            }
+            catch (Exception e) { throw new Exception(e.Message); }
+        }
+
 
 
 
