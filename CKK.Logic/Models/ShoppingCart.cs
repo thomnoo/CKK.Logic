@@ -1,171 +1,131 @@
 ﻿
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace CKK.Logic.Models
 {
     public class ShoppingCart
     {
         private Customer _customer;
-        private ShoppingCartItem _product1;
-        private ShoppingCartItem _product2;
-        private ShoppingCartItem _product3;
+
+        private List<ShoppingCartItem> _products;
 
        public ShoppingCart(Customer cust)
         {
             _customer = cust;
+            _products = new List<ShoppingCartItem>();
         }
+
+
+
 
         public int GetCustomerId()
         {
             return _customer.GetId();
         }
 
+
+
+
         public ShoppingCartItem GetProductById(int id)
         {
-            if (_product1.GetProduct().GetId() == id)
-            { return _product1; }
+            ShoppingCartItem item = null;
 
-            else if (_product2.GetProduct().GetId() == id)
-            { return _product2; }
+            var list =
+                from i in _products
+                where i.GetProduct().GetId().Equals(id) // where i.GetProduct().GetId() == id
+                select i;
 
-            else if (_product3.GetProduct().GetId() == id)
-            { return _product3; }
+            if(list.Any())
+            {
+                item = list.First();
+            }
 
-            else
-            { return null; }
+            
+             
+            
+
+            return item;
         }
 
-        public ShoppingCartItem AddProduct(Product prod)
-        {
-            return AddProduct(prod,1);
-        }
+
+
 
         public ShoppingCartItem AddProduct(Product prod,int quantity)
         {
-            if (quantity <= 0)
-            {
-                return null;
-            }
-
             ShoppingCartItem item = null;
 
-            if (_product1 != null && _product1.GetProduct().GetId() == prod.GetId())
+            var list =
+                from p in _products
+                where p.GetProduct() == prod
+                select p;
+            if(list.Any())
             {
-                item = _product1;
+                list.First().SetQuantity(list.First().GetQuantity() + quantity);
             }
 
-            else if (_product2 != null && _product2.GetProduct().GetId() == prod.GetId())
+            else 
             {
-                item = _product2;
+                _products.Add(new ShoppingCartItem(prod,quantity));
+                item = _products[_products.Count - 1];
+                
             }
+            return item;    
+        }
 
-            else if (_product3 != null && _product3.GetProduct().GetId() == prod.GetId())
-            {
-                item = _product3;
-            }
 
-            if (item != null) 
-            {
-                item.SetQuantity(item.GetQuantity() + quantity);
-            }
 
-            else if (_product1 == null)
-            {
-                _product1 = new ShoppingCartItem(prod, quantity);
-                item = _product1;
-            }
 
-            else if (_product2 == null)
-            {
-                _product2 = new ShoppingCartItem(prod, quantity);
-                item = _product2;
-            }
+        public ShoppingCartItem RemoveProduct(Product prod,int quantity)
+        {
+            ShoppingCartItem item = null;
 
-            else if (_product3 == null)
+            var list =
+                from p in _products
+                where p.GetProduct() == prod
+                select p;
+            if(list.Any())
             {
-                _product3 = new ShoppingCartItem(prod, quantity);
-                item = _product3;
+                if(list.First().GetQuantity() <= quantity)
+                {
+                    list.First().SetQuantity(0);
+                    item = list.First();
+                    _products.Remove(list.First());
+                }
+
+                else
+                {
+                    int newQuantity = list.First().GetQuantity() - quantity;
+                    item = list.First();
+                }
             }
 
             return item;
         }
 
-        public ShoppingCartItem RemoveProduct(Product prod,int quantity)
-        {
-            if (quantity <= 0)
-            {
-                return null;
-            }
 
-            ShoppingCartItem item = GetProductById(prod.GetId());
 
-            if (item != null)
-            {
-                if (item.GetQuantity() - quantity < 0)
-                {
-                    quantity = item.GetQuantity();
-                }
-
-                int newQuantity = item.GetQuantity() - quantity;
-
-              
-
-                if (newQuantity == 0)
-                {
-                    return null;
-                }
-
-                else
-                {
-                    item.SetQuantity(newQuantity);
-                    return item;
-                }
-
-            }
-
-            return null;
-
-        }
 
         public decimal GetTotal()
         {
             decimal total = 0;
 
-            if (_product1 != null)
+            foreach (var item in _products)
             {
-                total += _product1.GetTotal();
-            }
-
-            if (_product2 != null)
-            {
-                total += _product2.GetTotal();
-            }
-
-            if (_product3 != null)
-            {
-                total += _product3.GetTotal();
+                total += item.GetTotal();
             }
 
             return total;
+           
         }
 
-        public ShoppingCartItem GetProduct(int prodNum)
+      
+
+
+        public List<ShoppingCartItem> GetProducts()
         {
-            if (_product1 != null && _product1.GetProduct().GetId() == prodNum)
-            {
-                return _product1;
-            }
-
-            if (_product2 != null && _product2.GetProduct().GetId() == prodNum)
-            {
-                return _product2;
-            }
-
-            if (_product3 != null && _product3.GetProduct().GetId() == prodNum)
-            {
-                return _product3;
-            }
-
-            return null;
+            return _products;
         }
 
     }
