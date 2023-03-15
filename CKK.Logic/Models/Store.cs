@@ -8,8 +8,8 @@ namespace CKK.Logic.Models
     {
         private int _id;
         private string _name;
-
         private List<StoreItem> _products = new List<StoreItem>();
+
 
         public int GetId()
         {
@@ -31,11 +31,13 @@ namespace CKK.Logic.Models
             _name = name;
         }
 
-        public void AddStoreItem(Product prod, int quantity)
+        public StoreItem AddStoreItem(Product prod, int quantity)
         {
+            StoreItem storeItem = new StoreItem(prod,quantity);
+
             var list =
                   from p in _products
-                  where p.GetProduct().GetId() == prod.GetId()
+                  where p.GetProduct() == prod
                   select p;
 
             if (list.Any())
@@ -44,9 +46,12 @@ namespace CKK.Logic.Models
             }
             else
             {
-                _products.Add(new StoreItem(prod, quantity));
+                StoreItem newItem = new StoreItem(prod,quantity);
+                _products.Add(newItem());
+                storeItem = newItem;
+              
             }
-
+            return storeItem;
         }
 
         public StoreItem RemoveStoreItem(int id, int quantity)
@@ -56,6 +61,7 @@ namespace CKK.Logic.Models
                  from p in _products
                  where p.GetProduct().GetId() == id
                  select p;
+
             if (list.Any())
             {
                 if (list.First().GetQuantity() < quantity)
@@ -84,6 +90,7 @@ namespace CKK.Logic.Models
                 from item in _products
                 where item.GetProduct().GetId().Equals(id)
                 select item;
+
             if (list.Any())
             {
                 storeItem = list.First();

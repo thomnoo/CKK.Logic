@@ -34,17 +34,13 @@ namespace CKK.Logic.Models
 
             var list =
                 from i in _products
-                where i.GetProduct().GetId().Equals(id) // where i.GetProduct().GetId() == id
+                where i.GetProduct().GetId() == id
                 select i;
 
             if(list.Any())
             {
                 item = list.First();
             }
-
-            
-             
-            
 
             return item;
         }
@@ -60,6 +56,7 @@ namespace CKK.Logic.Models
                 from p in _products
                 where p.GetProduct() == prod
                 select p;
+
             if(list.Any())
             {
                 list.First().SetQuantity(list.First().GetQuantity() + quantity);
@@ -85,6 +82,7 @@ namespace CKK.Logic.Models
                 from p in _products
                 where p.GetProduct() == prod
                 select p;
+
             if(list.Any())
             {
                 if(list.First().GetQuantity() <= quantity)

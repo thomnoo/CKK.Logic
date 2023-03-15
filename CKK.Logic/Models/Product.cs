@@ -38,11 +38,5 @@ namespace CKK.Logic.Models
             _price = price;        
         }
 
-
-
-
-
-
-
     }
 }
