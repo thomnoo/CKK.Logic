@@ -6,9 +6,8 @@ namespace CKK.Logic.Models
     {
         private int _id;
         private string _name;
-        private Product _product1;
-        private Product _product2;
-        private Product _product3;
+
+        private List<StoreItem> _products = new List<StoreItem>();
 
         public int GetId()
         {
@@ -32,25 +31,23 @@ namespace CKK.Logic.Models
 
         public void AddStoreItem(Product prod)
         {
-            if (_product1 == null)
+            bool productExists = false;
+
+            for (int i = 0; i < _products.Count; i++)
             {
-                _product1 = prod;
-               
+                
+                if (_products[i].GetId() == prod.GetId())
+                {
+                    _products[i].SetQuantity(_products[i].GetQuantity() + prod.GetQuantity());
+                    productExists = true;
+                    break;
+                }           
             }
 
-            else if (_product2 == null)
+            if (!productExists)
             {
-                _product2 = prod;
-               
+                _products.Add(prod);
             }
-
-            else if (_product3== null)
-            {
-                _product3 = prod;
-             
-            }
-
-           
         }
 
         public void RemoveStoreItem(int productNumber)
