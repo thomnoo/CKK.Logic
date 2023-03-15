@@ -74,13 +74,13 @@ namespace CKK.Logic.Models
 
 
 
-        public ShoppingCartItem RemoveProduct(Product prod,int quantity)
+        public ShoppingCartItem RemoveProduct(int id,int quantity)
         {
             ShoppingCartItem item = null;
 
             var list =
                 from p in _products
-                where p.GetProduct() == prod
+                where p.GetProduct().GetId() == id
                 select p;
 
             if(list.Any())
