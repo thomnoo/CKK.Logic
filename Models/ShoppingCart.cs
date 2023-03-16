@@ -52,7 +52,6 @@ namespace CKK.Logic.Models
         {
             ShoppingCartItem item = null;
 
-            // Add validation
             if (quantity <= 0) { return item; }
 
             var list =
