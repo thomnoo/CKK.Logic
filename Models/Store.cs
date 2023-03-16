@@ -16,24 +16,38 @@ namespace CKK.Logic.Models
             return _id;
         }
 
+
+
+
         public void SetId(int id)
         {
             _id = id;
         }
+
+
+
 
         public string GetName()
         {
             return _name;
         }
 
+
+
+
         public void SetName(string name)
         {
             _name = name;
         }
 
+
+
+
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
-            StoreItem storeItem = new StoreItem(prod,quantity);
+            StoreItem storeItem = null;
+
+            if(quantity <= 0) { return storeItem; }
 
             var list =
                   from p in _products
@@ -43,16 +57,20 @@ namespace CKK.Logic.Models
             if (list.Any())
             {
                 list.First().SetQuantity(list.First().GetQuantity() + quantity);
+                storeItem = list.First();
             }
             else
             {
                 StoreItem newItem = new StoreItem(prod,quantity);
-                _products.Add(newItem());
+                _products.Add(newItem);
                 storeItem = newItem;
-              
             }
+
             return storeItem;
         }
+
+
+
 
         public StoreItem RemoveStoreItem(int id, int quantity)
         {
@@ -78,10 +96,16 @@ namespace CKK.Logic.Models
             return item;
         }
 
+
+
+
         public List<StoreItem> GetStoreItems()
         {
             return _products;
         }
+
+
+
 
         public StoreItem FindStoreItemById(int id)
         {
@@ -98,6 +122,9 @@ namespace CKK.Logic.Models
             }
             return storeItem;
         }
+
+
+
 
     }
 

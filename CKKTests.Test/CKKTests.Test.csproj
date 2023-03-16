@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CKK.Logic.csproj" />
     <ProjectReference Include="..\CKK.Logic\CKK.Logic.csproj" />
   </ItemGroup>
 

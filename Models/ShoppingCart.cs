@@ -52,6 +52,9 @@ namespace CKK.Logic.Models
         {
             ShoppingCartItem item = null;
 
+            // Add validation
+            if (quantity <= 0) { return item; }
+
             var list =
                 from p in _products
                 where p.GetProduct() == prod
@@ -95,6 +98,7 @@ namespace CKK.Logic.Models
                 else
                 {
                     int newQuantity = list.First().GetQuantity() - quantity;
+                    list.First().SetQuantity(list.First().GetQuantity()  -  quantity);
                     item = list.First();
                 }
             }
