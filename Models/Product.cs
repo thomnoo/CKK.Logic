@@ -1,42 +1,20 @@
-﻿
+﻿using CKK.Logic.Interfaces;
+
+
 
 namespace CKK.Logic.Models
 {
-    public class Product
+    public class Product : Entity
     {
-        private int _id;
-        private string _name;
-        private decimal _price;
+       
+        public decimal Price { get; set; }
+       
 
-        public int GetId()
+        public Product (int id,string name,decimal price) : base(id,name)
         {
-          return _id;
+            Price = price;
         }
 
-        public void SetId(int id)
-        {
-           _id = id;
-        }
-
-        public string GetName()
-        {
-            return _name;
-        }
-
-        public void SetName(string name)
-        {
-            _name = name;
-        }
-
-        public decimal GetPrice()
-        {
-          return _price;
-        }
-
-        public void SetPrice(decimal price)
-        {
-            _price = price;        
-        }
-
+        public Product() : base(0, "") { }
     }
 }

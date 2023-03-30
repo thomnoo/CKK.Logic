@@ -1,46 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using CKK.Logic.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
+
 
 
 namespace CKK.Logic.Models
 {
-    public class Store
+    public class Store : Entity
     {
-        private int _id;
-        private string _name;
+       
         private List<StoreItem> _products = new List<StoreItem>();
 
-
-        public int GetId()
+        public Store(int id, string name) : base(id,name)
         {
-            return _id;
+
         }
 
-
-
-
-        public void SetId(int id)
-        {
-            _id = id;
-        }
-
-
-
-
-        public string GetName()
-        {
-            return _name;
-        }
-
-
-
-
-        public void SetName(string name)
-        {
-            _name = name;
-        }
-
-
+        public Store() : base(0, "") { }
 
 
         public StoreItem AddStoreItem(Product prod, int quantity)
@@ -51,12 +27,12 @@ namespace CKK.Logic.Models
 
             var list =
                   from p in _products
-                  where p.GetProduct() == prod
+                  where p.Product == prod
                   select p;
 
             if (list.Any())
             {
-                list.First().SetQuantity(list.First().GetQuantity() + quantity);
+                list.First().Quantity += quantity;
                 storeItem = list.First();
             }
             else
@@ -77,17 +53,17 @@ namespace CKK.Logic.Models
             StoreItem item = null;
             var list =
                  from p in _products
-                 where p.GetProduct().GetId() == id
+                 where p.Product.Id == id
                  select p;
 
             if (list.Any())
             {
-                if (list.First().GetQuantity() < quantity)
+                if (list.First().Quantity < quantity)
                 {
-                    quantity = list.First().GetQuantity();
+                    quantity = list.First().Quantity;
                 }
 
-                list.First().SetQuantity(list.First().GetQuantity() - quantity);
+                list.First().Quantity -= quantity;
                 item = list.First();
             }
             
@@ -113,7 +89,7 @@ namespace CKK.Logic.Models
 
             var list =
                 from item in _products
-                where item.GetProduct().GetId().Equals(id)
+                where item.Product.Id.Equals(id)
                 select item;
 
             if (list.Any())

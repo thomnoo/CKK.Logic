@@ -1,53 +1,20 @@
 ﻿
 
+using CKK.Logic.Interfaces;
+
 namespace CKK.Logic.Models
 {
-    public class Customer
+    public class Customer : Entity
     {
-       private int _id;
-       private string _name;
-       private string _address;
+       
+      public string Address { get; set; }
+      
 
-       public int GetId()
+        public Customer(int id,string name, string address) : base(id,name)
         {
-         return _id;
+           Address = address;
         }
 
-        public void SetId(int id)
-        {
-            _id = id;
-        }
-
-        public string GetName()
-        {
-            return _name;
-        }
-
-        public void SetName(string name)
-        {
-            _name = name;        
-        }
-
-        public string GetAddress()
-        {
-            return _address;
-        }
-
-        public void SetAddress(string address)
-        {
-         _address = address;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
+        public Customer() : base(0, "") { }
     }
 }
