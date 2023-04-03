@@ -11,12 +11,7 @@ namespace CKK.Logic.Models
        
         private List<StoreItem> _products = new List<StoreItem>();
 
-        public Store(int id, string name) : base(id,name)
-        {
-
-        }
-
-        public Store() : base(0, "") { }
+       
 
 
         public StoreItem AddStoreItem(Product prod, int quantity)
