@@ -5,11 +5,12 @@ using System.Linq;
 
 namespace CKK.Logic.Models
 {
-    public class ShoppingCart
+    public class ShoppingCart : IShoppingCart
     {
        
 
         private List<InventoryItem> _products;
+       
 
         public ShoppingCart(Customer cust)
         {
@@ -19,6 +20,11 @@ namespace CKK.Logic.Models
         }
 
         public Customer Customer { get; set; }
+
+        public int GetCustomerId()
+        {
+            return Customer.Id;
+        }
 
         public InventoryItem GetProductById(int id)
         {

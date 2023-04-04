@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CKK.Logic.Models
 {
-    public class Store : Entity
+    public class Store : Entity, IStore
     {
        
         private List<StoreItem> _products = new List<StoreItem>();
