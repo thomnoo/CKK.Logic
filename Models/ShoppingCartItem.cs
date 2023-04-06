@@ -8,7 +8,8 @@ namespace CKK.Logic.Models
     {
         public ShoppingCartItem(Product product, int quantity)
         {
-            
+            base.Product = product;
+            base.Quantity = quantity;
         }
 
 

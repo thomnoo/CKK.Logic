@@ -1,24 +1,29 @@
 ﻿using CKK.Logic.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-
-
+using CKK.Logic.Exceptions;
+using System;
 
 namespace CKK.Logic.Models
 {
     public class Store : Entity, IStore
     {
-       
+
         private List<StoreItem> _products = new List<StoreItem>();
 
-       
+
 
 
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
             StoreItem storeItem = null;
 
-            if(quantity <= 0) { return storeItem; }
+            if (quantity < 0)
+            {
+                throw new InventoryItemStockTooLowException();
+            }
+
+            if (quantity == 0) { return storeItem; }
 
             var list =
                   from p in _products
@@ -32,7 +37,7 @@ namespace CKK.Logic.Models
             }
             else
             {
-                StoreItem newItem = new StoreItem(prod,quantity);
+                StoreItem newItem = new StoreItem(prod, quantity);
                 _products.Add(newItem);
                 storeItem = newItem;
             }
@@ -45,7 +50,14 @@ namespace CKK.Logic.Models
 
         public StoreItem RemoveStoreItem(int id, int quantity)
         {
+
             StoreItem item = null;
+
+            if (quantity < 0)
+            { 
+                throw new ArgumentOutOfRangeException();
+            }
+
             var list =
                  from p in _products
                  where p.Product.Id == id
@@ -53,6 +65,7 @@ namespace CKK.Logic.Models
 
             if (list.Any())
             {
+
                 if (list.First().Quantity < quantity)
                 {
                     quantity = list.First().Quantity;
@@ -60,12 +73,18 @@ namespace CKK.Logic.Models
 
                 list.First().Quantity -= quantity;
                 item = list.First();
-            }
-            
 
+
+            }
+            else
+            {
+                throw new ProductDoesNotExistException();
+            }
 
             return item;
         }
+
+
 
 
 
@@ -81,6 +100,11 @@ namespace CKK.Logic.Models
         public StoreItem FindStoreItemById(int id)
         {
             StoreItem storeItem = null;
+
+            if (id < 0)
+            {
+                throw new InvalidIdException();
+            }
 
             var list =
                 from item in _products

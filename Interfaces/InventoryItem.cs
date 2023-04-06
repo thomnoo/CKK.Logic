@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CKK.Logic.Exceptions;
 using CKK.Logic.Models;
 
-
-namespace CKK.Logic.Interfaces
+public abstract class InventoryItem
 {
-    public abstract class InventoryItem
+    private int _quantity;
+
+    public Product Product { get; set; }
+    public int Quantity
     {
-        
+        get { return _quantity; }
 
-        public  Product Product { get; set; }
-        public int Quantity { get; set; }
-
+        set
+        {
+            if (value < 0)
+            {
+                throw new InventoryItemStockTooLowException();
+            }
+            else
+            {
+                _quantity = value;
+            }
+        }
     }
 }

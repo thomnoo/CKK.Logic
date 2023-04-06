@@ -1,5 +1,7 @@
 ﻿
+using CKK.Logic.Exceptions;
 using CKK.Logic.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,16 +9,16 @@ namespace CKK.Logic.Models
 {
     public class ShoppingCart : IShoppingCart
     {
-       
+
 
         private List<InventoryItem> _products;
-       
+
 
         public ShoppingCart(Customer cust)
         {
             _products = new List<InventoryItem>();
             Customer = cust;
-      
+
         }
 
         public Customer Customer { get; set; }
@@ -29,6 +31,11 @@ namespace CKK.Logic.Models
         public InventoryItem GetProductById(int id)
         {
             InventoryItem item = null;
+
+            if (id < 0)
+            {
+                throw new InvalidIdException();
+            }
 
             var list =
                 from i in _products
@@ -47,6 +54,11 @@ namespace CKK.Logic.Models
         {
             InventoryItem item = null;
 
+            if (quantity < 0)
+            {
+                throw new InventoryItemStockTooLowException();
+            }
+
             if (quantity <= 0) { return item; }
 
             var list =
@@ -60,7 +72,7 @@ namespace CKK.Logic.Models
             }
             else
             {
-                _products.Add( new ShoppingCartItem(prod, quantity));
+                _products.Add(new ShoppingCartItem(prod, quantity));
                 item = _products[_products.Count - 1];
             }
             return item;
@@ -69,6 +81,11 @@ namespace CKK.Logic.Models
         public InventoryItem RemoveProduct(int id, int quantity)
         {
             InventoryItem item = null;
+
+            if (quantity < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
 
             var list =
                 from p in _products
@@ -88,6 +105,10 @@ namespace CKK.Logic.Models
                     list.First().Quantity -= quantity;
                     item = list.First();
                 }
+            }
+            else
+            {
+                throw new ProductDoesNotExistException();
             }
 
             return item;
