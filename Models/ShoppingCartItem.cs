@@ -11,8 +11,6 @@ namespace CKK.Logic.Models
             base.Product = product;
             base.Quantity = quantity;
         }
-
-
         
         public decimal GetTotal()
         {
@@ -20,10 +18,12 @@ namespace CKK.Logic.Models
             
         }
 
-
     }
 
 }
+
+
+
 
        
 
