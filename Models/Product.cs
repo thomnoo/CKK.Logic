@@ -4,6 +4,7 @@ using System;
 
 namespace CKK.Logic.Models
 {
+    [Serializable]
     public class Product : Entity
     {
         private decimal _price;

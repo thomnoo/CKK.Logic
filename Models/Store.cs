@@ -9,40 +9,65 @@ namespace CKK.Logic.Models
     public class Store : Entity, IStore
     {
 
-        private List<StoreItem> _products = new List<StoreItem>();
+        private int idcounter = 1;
+
+        public List<StoreItem> _products = new List<StoreItem>();
 
 
+        public string UpdateStoreItem(StoreItem item)
+        {
+            for(var i = 0; i < _products.Count; i++)
+            {
+                StoreItem founditem = _products[i];
+                if(founditem.Product.Id == item.Product.Id)
+                {
+                    _products[i] = item;
 
+                    return "Add Product Successful";
+                }
+            }
+
+            return "Adding Product Failed";
+        }
 
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
-            StoreItem storeItem = null;
+            prod.Id = idcounter;
+            StoreItem item = new StoreItem(prod,quantity);
+            _products.Add(item);
+            idcounter++;
+            return item;
 
-            if (quantity < 0)
-            {
-                throw new InventoryItemStockTooLowException();
-            }
+            //StoreItem storeItem = null;
 
-            if (quantity == 0) { return storeItem; }
+            //if (quantity < 0)
+            //{
+            //    throw new InventoryItemStockTooLowException();
+            //}
 
-            var list =
-                  from p in _products
-                  where p.Product == prod
-                  select p;
+            //if (quantity == 0) { return storeItem; }
 
-            if (list.Any())
-            {
-                list.First().Quantity += quantity;
-                storeItem = list.First();
-            }
-            else
-            {
-                StoreItem newItem = new StoreItem(prod, quantity);
-                _products.Add(newItem);
-                storeItem = newItem;
-            }
+            //var list =
+            //      from p in _products
+            //      where p.Product == prod
+            //      select p;
 
-            return storeItem;
+            //if (list.Any())
+            //{
+            //    list.First().Quantity += quantity;
+            //    storeItem = list.First();
+            //}
+            //else
+            //{
+            //    StoreItem newItem = new StoreItem(prod, quantity);
+            //    _products.Add(newItem);
+            //    storeItem = newItem;
+            //}
+            //return storeItem;
+                
+                    
+
+
         }
 
 
@@ -84,7 +109,17 @@ namespace CKK.Logic.Models
             return item;
         }
 
-
+        public void DeleteStoreItem(int id)
+        {
+            foreach (var item in _products)
+            {
+                if(item.Product.Id == id)
+                {
+                    _products.Remove(item);
+                    break;
+                }
+            }
+        }
 
 
 

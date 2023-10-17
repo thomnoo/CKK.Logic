@@ -1,10 +1,13 @@
 ﻿using CKK.Logic.Exceptions;
 using CKK.Logic.Models;
+using System;
 
+[Serializable]
 public abstract class InventoryItem
 {
     private int _quantity;
 
+    
     public Product Product { get; set; }
     public int Quantity
     {
