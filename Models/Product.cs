@@ -7,24 +7,10 @@ namespace CKK.Logic.Models
     [Serializable]
     public class Product : Entity
     {
-        private decimal _price;
-
-
-        public decimal Price
-        {
-            get { return _price; }
-
-            set
-            {
-                if (value < 0)
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-                else
-                {
-                    _price = value;
-                }
-            }
-        }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        private decimal price { get; set; }
+        public decimal Price { get; set; }
+        public int Quantity { get; set; }
     }
 }

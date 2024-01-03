@@ -1,5 +1,6 @@
 ﻿
 
+using CKK.Logic.Exceptions;
 using CKK.Logic.Interfaces;
 using System;
 
@@ -8,17 +9,30 @@ namespace CKK.Logic.Models
     [Serializable]
     public class ShoppingCartItem : InventoryItem
     {
-        //CONSTRUCTOR
-        public ShoppingCartItem(Product product, int quantity)
+        public Product Product { get; set; }
+        public int ShoppingCartId { get; set; }
+        public int CustomerId { get; set; }
+        public int ProductId { get; set; }
+        private int quantity {  get; set; }
+        public int Quantity
         {
-            base.Product = product;
-            base.Quantity = quantity;
+            get => quantity;
+            set
+            {
+                if(value >= 0)
+                {
+                    quantity = value;
+                }
+                else
+                {
+                    throw new InventoryItemStockTooLowException();
+                }
+            }
         }
-        
+
         public decimal GetTotal()
         {
             return Product.Price * Quantity;
-            
         }
 
     }
@@ -28,5 +42,5 @@ namespace CKK.Logic.Models
 
 
 
-       
+
 
