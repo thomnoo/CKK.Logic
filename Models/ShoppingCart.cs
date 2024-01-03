@@ -10,24 +10,37 @@ namespace CKK.Logic.Models
     public class ShoppingCart : IShoppingCart
     {
 
-
+        #region FIELDS AND PROPERTIES
+        //FEILDS
         private List<InventoryItem> _products;
 
+        //PROPERTIES
+        public Customer Customer { get; set; }
+        public int ShoppingCartId { get; set; }
+        public int CustomerId { get; set; }
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; } = new List<ShoppingCartItem>();
+        #endregion
 
+
+
+
+        #region METHODS
+
+        // CONSTRUCTOR
         public ShoppingCart(Customer cust)
         {
-            _products = new List<InventoryItem>();
+            
             Customer = cust;
 
         }
 
-        public Customer Customer { get; set; }
-
+        //GET CUSTOMER ID
         public int GetCustomerId()
         {
             return Customer.Id;
         }
 
+        //GET PRODUCT BY ID NUMBER
         public InventoryItem GetProductById(int id)
         {
             InventoryItem item = null;
@@ -50,6 +63,7 @@ namespace CKK.Logic.Models
             return item;
         }
 
+        //  ADD PRODUCTS TO SHOPPING CART
         public InventoryItem AddProduct(Product prod, int quantity)
         {
             InventoryItem item = null;
@@ -72,12 +86,13 @@ namespace CKK.Logic.Models
             }
             else
             {
-                _products.Add(new ShoppingCartItem(prod, quantity));
+                ShoppingCartItems.Add(new ShoppingCartItem(prod, quantity));
                 item = _products[_products.Count - 1];
             }
             return item;
         }
 
+        //REMOVE PRODUCT FROM SHOPPING CART
         public InventoryItem RemoveProduct(int id, int quantity)
         {
             InventoryItem item = null;
@@ -88,7 +103,7 @@ namespace CKK.Logic.Models
             }
 
             var list =
-                from p in _products
+                from p in ShoppingCartItems
                 where p.Product.Id == id
                 select p;
 
@@ -98,7 +113,7 @@ namespace CKK.Logic.Models
                 {
                     list.First().Quantity = 0;
                     item = list.First();
-                    _products.Remove(list.First());
+                    ShoppingCartItems.Remove(list.First());
                 }
                 else
                 {
@@ -128,7 +143,9 @@ namespace CKK.Logic.Models
 
         public List<InventoryItem> GetProducts()
         {
+           
             return _products;
         }
+        #endregion
     }
 }

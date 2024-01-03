@@ -8,6 +8,7 @@ namespace CKK.Logic.Models
     [Serializable]
     public class ShoppingCartItem : InventoryItem
     {
+        //CONSTRUCTOR
         public ShoppingCartItem(Product product, int quantity)
         {
             base.Product = product;

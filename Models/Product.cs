@@ -9,6 +9,7 @@ namespace CKK.Logic.Models
     {
         private decimal _price;
 
+
         public decimal Price
         {
             get { return _price; }

@@ -8,12 +8,15 @@ namespace CKK.Logic.Models
 {
     public class Store : Entity, IStore
     {
-
+        #region FIELDS AND PROPERTIES
         private int idcounter = 1;
 
         public List<StoreItem> _products = new List<StoreItem>();
 
+        #endregion
 
+
+        #region METHODS
         public string UpdateStoreItem(StoreItem item)
         {
             for(var i = 0; i < _products.Count; i++)
@@ -37,41 +40,36 @@ namespace CKK.Logic.Models
             _products.Add(item);
             idcounter++;
             return item;
-
-            //StoreItem storeItem = null;
-
-            //if (quantity < 0)
-            //{
-            //    throw new InventoryItemStockTooLowException();
-            //}
-
-            //if (quantity == 0) { return storeItem; }
-
-            //var list =
-            //      from p in _products
-            //      where p.Product == prod
-            //      select p;
-
-            //if (list.Any())
-            //{
-            //    list.First().Quantity += quantity;
-            //    storeItem = list.First();
-            //}
-            //else
-            //{
-            //    StoreItem newItem = new StoreItem(prod, quantity);
-            //    _products.Add(newItem);
-            //    storeItem = newItem;
-            //}
-            //return storeItem;
-                
-                    
-
-
         }
 
+        public List<StoreItem> GetAllProductsByName(string name)
+        {
+            List<StoreItem> matchingItems = new List<StoreItem>();
 
+            foreach (StoreItem item in _products)
+            {
+                if (item.Product.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    matchingItems.Add(item);
+                }
+            }
 
+            return matchingItems;
+        }
+
+        public List<StoreItem> GetProductsByQuantity()
+        {
+            List<StoreItem> sortedItems = _products.OrderByDescending(item => item.Quantity).ToList();
+
+            return sortedItems;
+        }
+
+        public List<StoreItem> GetProductsByPrice()
+        {
+            List<StoreItem> sortedItems = _products.OrderByDescending(item => item.Product.Price).ToList();
+
+            return sortedItems;
+        }
 
         public StoreItem RemoveStoreItem(int id, int quantity)
         {
@@ -153,7 +151,7 @@ namespace CKK.Logic.Models
             return storeItem;
         }
 
-
+        #endregion
 
 
     }
