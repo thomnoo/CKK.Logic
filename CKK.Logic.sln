@@ -6,13 +6,19 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK.Logic", "CKK.Logic.csproj", "{5758D833-8493-43E4-B495-EFD2EBE066B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK.UI", "..\CKK.UI\CKK.UI.csproj", "{416B5026-3CEE-4C3C-AE47-63D24C22CDA9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F8A1CCF1-6064-454C-8825-C49537F15FF7} = {F8A1CCF1-6064-454C-8825-C49537F15FF7}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK.Persistance", "..\CKK.Persistance\CKK.Persistance.csproj", "{17221863-A44E-44CC-99E1-837578F238FA}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5758D833-8493-43E4-B495-EFD2EBE066B7} = {5758D833-8493-43E4-B495-EFD2EBE066B7}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CKK.DB", "..\CKK.DB\CKK.DB.csproj", "{F8A1CCF1-6064-454C-8825-C49537F15FF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK.DB", "..\CKK.DB\CKK.DB.csproj", "{F8A1CCF1-6064-454C-8825-C49537F15FF7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5758D833-8493-43E4-B495-EFD2EBE066B7} = {5758D833-8493-43E4-B495-EFD2EBE066B7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

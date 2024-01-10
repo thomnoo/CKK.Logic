@@ -9,7 +9,7 @@ namespace CKK.Logic.Interfaces
 {
     public interface IStore
     {
-        public StoreItem AddStoreItem(Product prod, int quantity);
+       /* public StoreItem AddStoreItem(Product prod, int quantity);
         public StoreItem RemoveStoreItem(int id, int quantity);
         public List<StoreItem> GetStoreItems();
         public StoreItem FindStoreItemById(int id);
@@ -17,8 +17,8 @@ namespace CKK.Logic.Interfaces
         public string UpdateStoreItem(StoreItem item);
         public List<StoreItem> GetAllProductsByName(string name);
         public List<StoreItem> GetProductsByQuantity();
-        public List<StoreItem> GetProductsByPrice();
-        
+        public List<StoreItem> GetProductsByPrice();*/
+
     }
 }
 
