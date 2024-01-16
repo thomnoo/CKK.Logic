@@ -11,5 +11,29 @@ namespace CKK.Logic.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
+        public int IsFeatured { get; set; } = 0;
+
+
+        #region DISPLAY PROPERTIES
+        public string Display_Id
+        {
+            get => $"Id: {Id}";
+        }
+        public string Display_Name
+        {
+            get => $"Name: {Name}";
+        }
+
+        public string Display_Price
+        {
+            get => $"Price: {Price}";
+        }
+
+        public string Display_Quantity
+        {
+            get => $"Quantity: {Quantity}";
+        }
+
+        #endregion
     }
 }
